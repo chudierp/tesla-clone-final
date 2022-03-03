@@ -1,13 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import AirItem from './components/airItems';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ShowFlightList from './components/flightList';
+
+const Stack = createStackNavigator();
+
+function HomeScreen({navigation}) {
+  return (
+    <View style={styles.container}>
+          <AirItem navigation={navigation} />
+    </View>
+  );
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <AirItem />
-      <StatusBar style="auto"/>
-    </View>
+    <NavigationContainer>
+       <StatusBar style="auto"/>
+       <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="details" component={ShowFlightList} />
+      </Stack.Navigator>
+    </NavigationContainer> 
   );
 }
 
